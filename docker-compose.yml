@@ -1,0 +1,43 @@
+version: "3.8"
+services:
+  db:
+    image: mysql
+    hostname: db-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=tlc
+      - MYSQL_USER=tlc
+      - MYSQL_PASSWORD=tlc
+    restart: always
+  etherpad:
+    hostname: etherpad
+    restart: on-failure
+    image: etherpad/etherpad:latest
+    ports:
+      - "9001:9001"
+    volumes:
+      - ./api/APIKEY.txt:/opt/etherpad-lite/APIKEY.txt
+  mail:
+    image: bytemark/smtp
+    restart: on-failure
+    ports:
+      - "2525:25"
+
+  back-app:
+    image: back-app-api
+    hostname: backserver
+    restart: on-failure
+    ports:
+      - "8080:8080"
+
+  fron-app:
+    image: tlcfront
+    restart: on-failure
+    depends_on:
+      - back-app
+    ports:
+      - "4200:80"
+
+

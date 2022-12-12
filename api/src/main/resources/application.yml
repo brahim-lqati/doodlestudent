@@ -1,6 +1,6 @@
 doodle:
   usepad: true
-  internalPadUrl: "http://localhost:9001/"
+  internalPadUrl: "http://etherpad:9001/"
   externalPadUrl: "http://localhost:9001/"
   padApiKey: "19d89ca52bc0fa4f19d6325464d9d7a032649b9fa68c111514627081e2784b4a"
   organizermail: "olivier.barais@gmail.com"
@@ -11,11 +11,11 @@ quarkus:
     username: tlc
     password: tlc
     jdbc:
-      url: jdbc:mysql://localhost:3306/tlc?useUnicode=true&serverTimezone=Europe/Paris
+      url: jdbc:mysql://db-mysql:3306/tlc?useUnicode=true&serverTimezone=Europe/Paris
       driver: com.mysql.cj.jdbc.Driver
   flyway:
-    migrate-at-start: false
-    baseline-on-migrate: false
+    migrate-at-start: true
+    baseline-on-migrate: true
 #    database:
 #      generation: none
 #      globally-quoted-identifiers: true

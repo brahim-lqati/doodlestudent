@@ -113,12 +113,13 @@ public class PollResourceEx {
 		String padId = Utils.getInstance().generateSlug(15);
 		if (this.usePad) {
 			if (client == null) {
+				System.out.println(padUrl);
 				client = new EPLiteClient(padUrl, apikey);
 			}
 			client.createPad(padId);
 			initPad(poll.getTitle(), poll.getLocation(), poll.getDescription(), client, padId);
 			poll.setPadURL(externalPadUrl + "p/" + padId);
-		} 
+		}
 		pollRepository.persist(poll);
 		return new ResponseEntity<>(poll, HttpStatus.CREATED);
 	}
